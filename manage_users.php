@@ -29,7 +29,6 @@ $users = $result->fetch_all(MYSQLI_ASSOC);
 <body>
 <div class="container">
         <h2>Gestionarea Utilizatorilor</h2>
-        <div class="table-responsive">
         <table class="table">
             <thead>
                 <tr>
@@ -57,7 +56,6 @@ $users = $result->fetch_all(MYSQLI_ASSOC);
                 <?php endforeach; ?>
             </tbody>
         </table>
-    </div>
     </div>
 </body>
 </html>

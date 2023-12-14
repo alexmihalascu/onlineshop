@@ -123,6 +123,10 @@ table th {
     margin: 5px 0;
 }
 
+.user-card {
+    margin-bottom: 20px;
+}
+
 .btn {
     display: inline-block;
     background-color: #007bff;
