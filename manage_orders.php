@@ -82,8 +82,8 @@ foreach ($orders as $key => $order) {
                             <form action="update_order_status.php" method="post" class="d-flex justify-content-center">
                                 <input type="hidden" name="order_id" value="<?= $order['order_id'] ?>">
                                 <select name="order_status" class="form-select form-select-sm mx-2">
-                                    <option value="Efectuată" <?= $order['order_status'] == 'Efectuată' ? 'selected' : '' ?>>Efectuată</option>
-                                    <option value="Neefectuată" <?= $order['order_status'] == 'Neefectuată' ? 'selected' : '' ?>>Neefectuată</option>
+                                    <option value="Efectuată" <?= $order['order_status'] == 'Efectuată' ? 'selected' : '' ?>>Efectuata</option>
+                                    <option value="Neefectuată" <?= $order['order_status'] == 'Neefectuată' ? 'selected' : '' ?>>Neefectuata</option>
                                 </select>
                                 <button type="submit" class="btn btn-primary btn-sm">Actualizează</button>
                             </form>

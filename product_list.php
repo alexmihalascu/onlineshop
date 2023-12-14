@@ -9,7 +9,15 @@ if (session_status() == PHP_SESSION_NONE) {
 $loggedIn = isset($_SESSION['user_id']);
 $isAdmin = isset($_SESSION['is_admin']) && $_SESSION['is_admin'];
 
-$sql = "SELECT product_id, name, description, price FROM products ORDER BY name";
+// Preia criteriul și direcția de sortare din GET sau setează unul implicit
+$sort = isset($_GET['sort']) ? $_GET['sort'] : 'name';
+$order = isset($_GET['order']) && in_array($_GET['order'], ['ASC', 'DESC']) ? $_GET['order'] : 'ASC';
+
+// Validare și pregătire a query-ului pentru sortare
+$allowedSorts = ['name', 'price', 'product_id'];
+$orderBy = in_array($sort, $allowedSorts) ? $sort : 'name';
+
+$sql = "SELECT product_id, name, description, price FROM products ORDER BY $orderBy $order";
 $result = $conn->query($sql);
 ?>
 
@@ -27,15 +35,20 @@ $result = $conn->query($sql);
     <div class="container">
         <h2>Produsele Noastre</h2>
 
-        <!-- Afișează aici mesajele de succes sau eroare -->
-        <?php if (isset($_SESSION['success_message'])): ?>
-            <div class="alert alert-success"><?= $_SESSION['success_message']; ?></div>
-            <?php unset($_SESSION['success_message']); ?>
-        <?php endif; ?>
-        <?php if (isset($_SESSION['error_message'])): ?>
-            <div class="alert alert-danger"><?= $_SESSION['error_message']; ?></div>
-            <?php unset($_SESSION['error_message']); ?>
-        <?php endif; ?>
+        <!-- Formular pentru sortare -->
+        <form action="product_list.php" method="get" class="mb-3">
+            Sortează după: 
+            <select name="sort" onchange="this.form.submit()">
+                <option value="name" <?= $sort == 'name' ? 'selected' : '' ?>>Nume</option>
+                <option value="price" <?= $sort == 'price' ? 'selected' : '' ?>>Preț</option>
+                <option value="product_id" <?= $sort == 'product_id' ? 'selected' : '' ?>>Data adăugării</option>
+            </select>
+            <select name="order" onchange="this.form.submit()">
+                <option value="ASC" <?= $order == 'ASC' ? 'selected' : '' ?>>Ascendent</option>
+                <option value="DESC" <?= $order == 'DESC' ? 'selected' : '' ?>>Descendent</option>
+            </select>
+        </form>
+
         <div class="product-grid">
             <?php while ($product = $result->fetch_assoc()): ?>
                 <div class="product-card">
@@ -53,27 +66,6 @@ $result = $conn->query($sql);
                 </div>
             <?php endwhile; ?>
         </div>
-
-        <?php
-        // Verificați dacă există un mesaj de succes în sesiune
-        if (isset($_SESSION['cart_success']) && $_SESSION['cart_success'] === true) {
-            echo '<div class="success-message" id="success-message">Produsul a fost adăugat cu succes în coș!</div>';
-            // Ștergeți variabila de sesiune pentru a evita afișarea repetată a mesajului.
-            unset($_SESSION['cart_success']);
-        }
-        ?>
-
     </div>
-
-    <script>
-        // Așteaptă o secunda și apoi ascunde mesajul de succes
-        setTimeout(function() {
-            var successMessage = document.getElementById("success-message");
-            if (successMessage) {
-                successMessage.style.display = "none";
-            }
-        }, 1000); // 1000 milisecunde = 1 secunde
-    </script>
 </body>
-
 </html>
