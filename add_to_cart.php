@@ -44,4 +44,3 @@ $stmt->execute();
 $_SESSION['cart_success'] = true;
 header("Location: product_list.php"); // Redirecționează înapoi la lista de produse
 exit;
-?>

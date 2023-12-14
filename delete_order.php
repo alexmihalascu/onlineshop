@@ -27,4 +27,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     header('Location: manage_orders.php');
     exit;
 }
-?>

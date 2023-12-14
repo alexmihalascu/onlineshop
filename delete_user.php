@@ -59,4 +59,3 @@ if (isset($_GET['id'])) {
 // Redirecționează înapoi dacă ID-ul nu este setat
 header('Location: manage_users.php');
 exit;
-?>

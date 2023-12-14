@@ -41,6 +41,7 @@ foreach ($orders as $key => $order) {
 
 <!DOCTYPE html>
 <html lang="ro">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -48,6 +49,7 @@ foreach ($orders as $key => $order) {
     <link href="style.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
+
 <body>
     <div class="container my-4">
         <h2>Gestionarea Comenzilor</h2>
@@ -68,14 +70,14 @@ foreach ($orders as $key => $order) {
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($orders as $order): ?>
+                    <?php foreach ($orders as $order) : ?>
                         <tr>
                             <td><?= htmlspecialchars($order['order_id']) ?></td>
                             <td><?= htmlspecialchars($order['username']) ?></td>
                             <td><?= $order['formatted_order_date'] ?></td>
                             <td>
-                                <?php if (!empty($orderDetails[$order['order_id']])): ?>
-                                    <?php foreach ($orderDetails[$order['order_id']] as $detail): ?>
+                                <?php if (!empty($orderDetails[$order['order_id']])) : ?>
+                                    <?php foreach ($orderDetails[$order['order_id']] as $detail) : ?>
                                         <p><?= htmlspecialchars($detail['name']) ?> - <?= $detail['quantity'] ?> buc. (<?= number_format($detail['price'], 2) ?> Lei/buc)</p>
                                     <?php endforeach; ?>
                                 <?php endif; ?>
@@ -109,4 +111,5 @@ foreach ($orders as $key => $order) {
         </div>
     </div>
 </body>
+
 </html>

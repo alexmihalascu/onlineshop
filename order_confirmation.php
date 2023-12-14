@@ -39,6 +39,7 @@ $items = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
 <!DOCTYPE html>
 <html lang="ro">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -46,6 +47,7 @@ $items = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     <link href="style.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
+
 <body>
     <div class="container mt-5">
         <h2>Confirmare Comandă</h2>
@@ -67,7 +69,7 @@ $items = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
                     <tbody>
                         <?php
                         $total = 0;
-                        foreach ($items as $item):
+                        foreach ($items as $item) :
                             $subtotal = $item['price'] * $item['quantity'];
                             $total += $subtotal;
                         ?>
@@ -96,4 +98,5 @@ $items = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
         <p class="mt-4">Îți mulțumim pentru comandă, <?= htmlspecialchars($_SESSION['username']) ?>! Comanda ta a fost procesată și este în curs de pregătire.</p>
     </div>
 </body>
+
 </html>

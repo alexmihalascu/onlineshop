@@ -25,4 +25,3 @@ if (isset($_GET['id']) && isset($_GET['status'])) {
 
 header('Location: manage_users.php');
 exit;
-?>

@@ -45,6 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <!DOCTYPE html>
 <html lang="ro">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -55,6 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
+
 <body>
     <div class="container">
         <h2 class="mt-4">Editare Produs</h2>
@@ -71,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <label for="price">Preț:</label>
                 <input type="number" name="price" id="price" value="<?= htmlspecialchars($product['price']) ?>" required class="form-control">
             </div>
-            <div class = "form-group">
+            <div class="form-group">
                 <label for="stock">Stoc:</label>
                 <input type="number" name="stock" id="stock" value="<?= htmlspecialchars($product['stock']) ?>" required class="form-control">
             </div>
@@ -81,4 +83,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </form>
     </div>
 </body>
+
 </html>
