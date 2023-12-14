@@ -17,12 +17,13 @@ $order = isset($_GET['order']) && in_array($_GET['order'], ['ASC', 'DESC']) ? $_
 $allowedSorts = ['name', 'price', 'product_id'];
 $orderBy = in_array($sort, $allowedSorts) ? $sort : 'name';
 
-$sql = "SELECT product_id, name, description, price FROM products ORDER BY $orderBy $order";
+$sql = "SELECT product_id, name, description, price, stock FROM products ORDER BY $orderBy $order";
 $result = $conn->query($sql);
 ?>
 
 <!DOCTYPE html>
 <html lang="ro">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,13 +32,14 @@ $result = $conn->query($sql);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </head>
+
 <body>
     <div class="container">
         <h2 class="mt-5">Produsele Noastre</h2>
 
         <!-- Formular pentru sortare -->
         <form action="product_list.php" method="get" class="mb-3">
-            Sortează după: 
+            Sortează după:
             <select name="sort" onchange="this.form.submit()" class="form-select">
                 <option value="name" <?= $sort == 'name' ? 'selected' : '' ?>>Nume</option>
                 <option value="price" <?= $sort == 'price' ? 'selected' : '' ?>>Preț</option>
@@ -50,22 +52,32 @@ $result = $conn->query($sql);
         </form>
 
         <div class="product-grid">
-            <?php while ($product = $result->fetch_assoc()): ?>
+            <?php while ($product = $result->fetch_assoc()) : ?>
                 <div class="product-card">
                     <h3><?= htmlspecialchars($product['name']) ?></h3>
                     <p><?= htmlspecialchars($product['description']) ?></p>
                     <p>Preț: <?= htmlspecialchars($product['price']) ?> Lei</p>
-                    <?php if ($loggedIn): ?>
-                        <a href="add_to_cart.php?product_id=<?= $product['product_id'] ?>&quantity=1" class="btn btn-primary">Adaugă în Coș</a>
-                    <?php else: ?>
+                    <?php if ($isAdmin) : ?>
+                        <p>Stoc: <?= htmlspecialchars($product['stock']) ?></p>
+                    <?php endif; ?>
+                    <?php if ($loggedIn) : ?>
+                        <?php if ($product['stock'] > 0) : ?>
+                            <a href="add_to_cart.php?product_id=<?= $product['product_id'] ?>&quantity=1" class="btn btn-primary">Adaugă în Coș</a>
+                        <?php else : ?>
+                            <button class="btn btn-secondary disabled">Stoc epuizat</button>
+                        <?php endif; ?>
+                    <?php else : ?>
                         <button class="btn btn-secondary disabled">Necesită autentificare</button>
                     <?php endif; ?>
-                    <?php if ($isAdmin): ?>
+                    <?php if ($isAdmin) : ?>
+                        <a href="edit_product.php?id=<?= $product['product_id'] ?>" class="btn btn-primary">Editează Produs</a>
                         <a href="delete_product.php?id=<?= $product['product_id'] ?>" class="btn btn-danger">Șterge Produs</a>
                     <?php endif; ?>
                 </div>
             <?php endwhile; ?>
+
         </div>
     </div>
 </body>
+
 </html>

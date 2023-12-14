@@ -51,7 +51,7 @@ $users = $result->fetch_all(MYSQLI_ASSOC);
                             <td>
                                 <a href="delete_user.php?id=<?= $user['user_id'] ?>" class="btn btn-danger">Șterge</a>
                                 <a href="update_user_status.php?id=<?= $user['user_id'] ?>&status=<?= $user['is_admin'] ? '0' : '1' ?>" class="btn btn-<?= $user['is_admin'] ? 'warning' : 'success' ?>">
-                                    <?= $user['is_admin'] ? 'Demote to User' : 'Promote to Admin' ?>
+                                    <?= $user['is_admin'] ? 'Retrogradează la Utilizator' : 'Promovează la Administrator' ?>
                                 </a>
                             </td>
                         </tr>

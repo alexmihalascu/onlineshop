@@ -64,7 +64,7 @@ $stmt->fetch(); // Obțineți valoarea
         <form method="post" action="user_profile.php">
             <div class="form-group">
                 <label>Nume de utilizator:</label>
-                <input type="text" name="username" value="<?= htmlspecialchars($currentUsername) ?>" required class="form-control">
+                <input type="text" disabled name="username" value="<?= htmlspecialchars($currentUsername) ?>" required class="form-control">
             </div>
             <div class="form-group">
                 <label>Noua Parola:</label>

@@ -192,3 +192,10 @@ table th {
 .table-responsive {
     overflox-x: auto;
 }
+
+.order-details {
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}

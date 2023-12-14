@@ -14,6 +14,13 @@ $product_id = $_GET['product_id'];
 $quantity = isset($_GET['quantity']) ? (int)$_GET['quantity'] : 1;
 $user_id = $_SESSION['user_id'];
 
+// Reducerea stocului
+$sql = "UPDATE products SET stock = stock - ? WHERE product_id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("ii", $quantity, $product_id);
+$stmt->execute();
+
+
 $sql = "SELECT quantity FROM cart WHERE user_id = ? AND product_id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("ii", $user_id, $product_id);

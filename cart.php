@@ -15,18 +15,37 @@ $user_id = $_SESSION['user_id'];
 
 // Actualizarea cantităților din coș
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update'])) {
-    foreach ($_POST['quantities'] as $product_id => $quantity) {
-        if ($quantity == 0) {
-            // Șterge produsul din coș
-            $sql = "DELETE FROM cart WHERE user_id = ? AND product_id = ?";
+    foreach ($_POST['quantities'] as $product_id => $newQuantity) {
+        // Obține cantitatea curentă din coș
+        $sql = "SELECT quantity FROM cart WHERE user_id = ? AND product_id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ii", $user_id, $product_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+
+        if ($row) {
+            $currentQuantity = $row['quantity'];
+            $difference = $currentQuantity - $newQuantity;
+
+            if ($newQuantity == 0) {
+                // Elimină produsul din coș
+                $sql = "DELETE FROM cart WHERE user_id = ? AND product_id = ?";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("ii", $user_id, $product_id);
+                $stmt->execute();
+            } else {
+                // Actualizează cantitatea
+                $sql = "UPDATE cart SET quantity = ? WHERE user_id = ? AND product_id = ?";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("iii", $newQuantity, $user_id, $product_id);
+                $stmt->execute();
+            }
+
+            // Ajustează stocul
+            $sql = "UPDATE products SET stock = stock + ? WHERE product_id = ?";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("ii", $user_id, $product_id);
-            $stmt->execute();
-        } else {
-            // Actualizează cantitatea
-            $sql = "UPDATE cart SET quantity = ? WHERE user_id = ? AND product_id = ?";
-            $stmt = $conn->prepare($sql);
-            $stmt->bind_param("iii", $quantity, $user_id, $product_id);
+            $stmt->bind_param("ii", $difference, $product_id);
             $stmt->execute();
         }
     }

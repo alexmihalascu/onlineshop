@@ -18,11 +18,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST['name'];
     $description = $_POST['description'];
     $price = $_POST['price'];
+    $stock = $_POST['stock'];
 
     // Adaugă produsul în baza de date
-    $sql = "INSERT INTO products (name, description, price) VALUES (?, ?, ?)";
+    $sql = "INSERT INTO products (name, description, price, stock) VALUES (?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    if ($stmt->execute([$name, $description, $price])) {
+    if ($stmt->execute([$name, $description, $price, $stock])) {
         echo "<p>Produsul a fost adăugat cu succes!</p>";
     } else {
         $error = "A apărut o eroare la adăugarea produsului.";
@@ -59,6 +60,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <label for="price" class="form-label">Preț:</label>
                 <input type="number" id="price" name="price" required class="form-control">
             </div>
+            <div class="mb-3">
+                <label for="stock" class="form-label">Stoc:</label>
+                <input type="number" id="stock" name="stock" required class="form-control">
             <div class="mb-3">
                 <input type="submit" value="Adaugă Produsul" class="btn btn-primary">
             </div>

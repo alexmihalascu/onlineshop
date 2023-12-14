@@ -19,23 +19,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST['name'];
     $description = $_POST['description'];
     $price = $_POST['price'];
+    $stock = $_POST['stock'];
 
-    $sql = "UPDATE products SET name = ?, description = ?, price = ? WHERE id = ?";
+    $sql = "UPDATE products SET name = ?, description = ?, price = ?, stock = ? WHERE product_id = ?";
     $stmt = $conn->prepare($sql);
-    if ($stmt->execute([$name, $description, $price, $product_id])) {
+    $stmt->bind_param("ssdii", $name, $description, $price, $stock, $product_id);
+    if ($stmt->execute()) {
         echo "<p>Produsul a fost actualizat cu succes!</p>";
     } else {
         echo "<p>A apărut o eroare la actualizarea produsului.</p>";
     }
 } else {
-    $sql = "SELECT name, description, price FROM products WHERE id = ?";
+    $sql = "SELECT name, description, price, stock FROM products WHERE product_id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->execute([$product_id]);
-    $product = $stmt->fetch(PDO::FETCH_ASSOC);
-}
+    $stmt->bind_param("i", $product_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $product = $result->fetch_assoc();
 
-if (!$product) {
-    die('Produsul nu a fost găsit.');
+    if (!$product) {
+        die('Produsul nu a fost găsit.');
+    }
 }
 ?>
 
@@ -46,8 +50,10 @@ if (!$product) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editare Produs</title>
     <link href="style.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -64,6 +70,10 @@ if (!$product) {
             <div class="form-group">
                 <label for="price">Preț:</label>
                 <input type="number" name="price" id="price" value="<?= htmlspecialchars($product['price']) ?>" required class="form-control">
+            </div>
+            <div class = "form-group">
+                <label for="stock">Stoc:</label>
+                <input type="number" name="stock" id="stock" value="<?= htmlspecialchars($product['stock']) ?>" required class="form-control">
             </div>
             <div class="form-group">
                 <input type="submit" value="Actualizează Produsul" class="btn btn-primary">
