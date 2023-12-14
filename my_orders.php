@@ -55,6 +55,7 @@ foreach ($orders as $key => $order) {
 <body>
     <div class="container mt-4">
         <h2>Comenzile Mele</h2>
+        <div class="table-responsive">
         <table class="table table-bordered table-hover">
             <thead class="table-light">
                 <tr>
@@ -83,6 +84,7 @@ foreach ($orders as $key => $order) {
                 <?php endforeach; ?>
             </tbody>
         </table>
+    </div>
     </div>
 
     <!-- Bootstrap JavaScript Bundle with Popper -->
