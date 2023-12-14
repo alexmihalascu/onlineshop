@@ -33,17 +33,17 @@ $result = $conn->query($sql);
 </head>
 <body>
     <div class="container">
-        <h2>Produsele Noastre</h2>
+        <h2 class="mt-5">Produsele Noastre</h2>
 
         <!-- Formular pentru sortare -->
         <form action="product_list.php" method="get" class="mb-3">
             Sortează după: 
-            <select name="sort" onchange="this.form.submit()">
+            <select name="sort" onchange="this.form.submit()" class="form-select">
                 <option value="name" <?= $sort == 'name' ? 'selected' : '' ?>>Nume</option>
                 <option value="price" <?= $sort == 'price' ? 'selected' : '' ?>>Preț</option>
                 <option value="product_id" <?= $sort == 'product_id' ? 'selected' : '' ?>>Data adăugării</option>
             </select>
-            <select name="order" onchange="this.form.submit()">
+            <select name="order" onchange="this.form.submit()" class="form-select">
                 <option value="ASC" <?= $order == 'ASC' ? 'selected' : '' ?>>Ascendent</option>
                 <option value="DESC" <?= $order == 'DESC' ? 'selected' : '' ?>>Descendent</option>
             </select>

@@ -54,7 +54,7 @@ $stmt->fetch(); // Obțineți valoarea
 </head>
 <body>
     <div class="container">
-        <h2>Profilul Meu</h2>
+        <h2 class="mt-5">Profilul Meu</h2>
         <?php if ($error): ?>
             <div class="alert alert-danger"><?= $error ?></div>
         <?php endif; ?>

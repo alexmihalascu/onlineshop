@@ -63,49 +63,49 @@ while ($row = $result->fetch_assoc()) {
     <title>Coș de Cumpărături</title>
     <link href="style.css" rel="stylesheet" type="text/css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="container">
-        <h2>Coșul tău de cumpărături</h2>
-        <div class= "table-responsive">
+        <h2 class="mt-4">Coșul tău de cumpărături</h2>
         <form action="cart.php" method="post">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Produs</th>
-                        <th>Cantitate</th>
-                        <th>Preț</th>
-                        <th>Total</th>
-                        <th>Acțiune</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $total = 0;
-                    foreach ($cart_items as $item):
-                        $subtotal = $item['price'] * $item['quantity'];
-                        $total += $subtotal;
-                    ?>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
                         <tr>
-                            <td><?= htmlspecialchars($item['name']) ?></td>
-                            <td>
-                                <input type="number" name="quantities[<?= $item['product_id'] ?>]" value="<?= $item['quantity'] ?>" min="0">
-                            </td>
-                            <td><?= number_format($item['price'], 2) ?> Lei</td>
-                            <td><?= number_format($subtotal, 2) ?> Lei</td>
-                            <td>
-                                <a href="delete_from_cart.php?product_id=<?= $item['product_id'] ?>" class="btn btn-danger">Șterge</a>
-                            </td>
+                            <th>Produs</th>
+                            <th>Cantitate</th>
+                            <th>Preț</th>
+                            <th>Total</th>
+                            <th>Acțiune</th>
                         </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $total = 0;
+                        foreach ($cart_items as $item):
+                            $subtotal = $item['price'] * $item['quantity'];
+                            $total += $subtotal;
+                        ?>
+                            <tr>
+                                <td><?= htmlspecialchars($item['name']) ?></td>
+                                <td>
+                                    <input type="number" name="quantities[<?= $item['product_id'] ?>]" value="<?= $item['quantity'] ?>" min="0" class="form-control">
+                                </td>
+                                <td><?= number_format($item['price'], 2) ?> Lei</td>
+                                <td><?= number_format($subtotal, 2) ?> Lei</td>
+                                <td>
+                                    <a href="delete_from_cart.php?product_id=<?= $item['product_id'] ?>" class="btn btn-danger">Șterge</a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
             <p>Total: <?= number_format($total, 2) ?> Lei</p>
             <input type="submit" name="update" value="Actualizează Coșul" class="btn btn-primary">
             <a href="checkout.php" class="btn btn-success">Finalizează Comanda</a>
         </form>
-    </div>
     </div>
 </body>
 </html>

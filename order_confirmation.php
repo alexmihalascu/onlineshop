@@ -38,44 +38,46 @@ $items = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     <title>Confirmare Comandă</title>
     <link href="style.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>t/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="container">
-        <h2>Confirmare Comandă</h2>
+        <h2 class="mt-5">Confirmare Comandă</h2>
         <p>Comanda ta a fost plasată cu succes!</p>
         <h3>Detalii Comandă</h3>
         <p>ID Comandă: <?= $order['order_id'] ?></p>
         <p>Data Comenzii: <?= $order['order_date'] ?></p>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Produs</th>
-                    <th>Preț</th>
-                    <th>Cantitate</th>
-                    <th>Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                $total = 0;
-                foreach ($items as $item):
-                    $subtotal = $item['price'] * $item['quantity'];
-                    $total += $subtotal;
-                ?>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead>
                     <tr>
-                        <td><?= htmlspecialchars($item['name']) ?></td>
-                        <td><?= number_format($item['price'], 2) ?> Lei</td>
-                        <td><?= $item['quantity'] ?></td>
-                        <td><?= number_format($subtotal, 2) ?> Lei</td>
+                        <th>Produs</th>
+                        <th>Preț</th>
+                        <th>Cantitate</th>
+                        <th>Total</th>
                     </tr>
-                <?php endforeach; ?>
-                <tr>
-                    <td colspan="3">Total General</td>
-                    <td><?= number_format($total, 2) ?> Lei</td>
-                </tr>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <?php
+                    $total = 0;
+                    foreach ($items as $item):
+                        $subtotal = $item['price'] * $item['quantity'];
+                        $total += $subtotal;
+                    ?>
+                        <tr>
+                            <td><?= htmlspecialchars($item['name']) ?></td>
+                            <td><?= number_format($item['price'], 2) ?> Lei</td>
+                            <td><?= $item['quantity'] ?></td>
+                            <td><?= number_format($subtotal, 2) ?> Lei</td>
+                        </tr>
+                    <?php endforeach; ?>
+                    <tr>
+                        <td colspan="3">Total General</td>
+                        <td><?= number_format($total, 2) ?> Lei</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </body>
 </html>

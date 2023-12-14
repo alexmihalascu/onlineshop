@@ -27,35 +27,38 @@ $users = $result->fetch_all(MYSQLI_ASSOC);
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </head>
 <body>
-<div class="container">
+<body>
+    <div class="container mt-4">
         <h2>Gestionarea Utilizatorilor</h2>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nume de Utilizator</th>
-                    <th>Email</th>
-                    <th>Statut</th>
-                    <th>Acțiuni</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($users as $user): ?>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
                     <tr>
-                        <td><?= htmlspecialchars($user['user_id']) ?></td>
-                        <td><?= htmlspecialchars($user['username']) ?></td>
-                        <td><?= htmlspecialchars($user['email']) ?></td>
-                        <td><?= $user['is_admin'] ? 'Administrator' : 'Utilizator' ?></td>
-                        <td>
-                            <a href="delete_user.php?id=<?= $user['user_id'] ?>" class="btn btn-danger">Șterge</a>
-                            <a href="update_user_status.php?id=<?= $user['user_id'] ?>&status=<?= $user['is_admin'] ? '0' : '1' ?>" class="btn btn-<?= $user['is_admin'] ? 'warning' : 'success' ?>">
-                                <?= $user['is_admin'] ? 'Demote to User' : 'Promote to Admin' ?>
-                            </a>
-                        </td>
+                        <th>ID</th>
+                        <th>Nume de Utilizator</th>
+                        <th>Email</th>
+                        <th>Statut</th>
+                        <th>Acțiuni</th>
                     </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <?php foreach ($users as $user): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($user['user_id']) ?></td>
+                            <td><?= htmlspecialchars($user['username']) ?></td>
+                            <td><?= htmlspecialchars($user['email']) ?></td>
+                            <td><?= $user['is_admin'] ? 'Administrator' : 'Utilizator' ?></td>
+                            <td>
+                                <a href="delete_user.php?id=<?= $user['user_id'] ?>" class="btn btn-danger">Șterge</a>
+                                <a href="update_user_status.php?id=<?= $user['user_id'] ?>&status=<?= $user['is_admin'] ? '0' : '1' ?>" class="btn btn-<?= $user['is_admin'] ? 'warning' : 'success' ?>">
+                                    <?= $user['is_admin'] ? 'Demote to User' : 'Promote to Admin' ?>
+                                </a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 </body>
 </html>

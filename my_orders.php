@@ -56,35 +56,35 @@ foreach ($orders as $key => $order) {
     <div class="container mt-4">
         <h2>Comenzile Mele</h2>
         <div class="table-responsive">
-        <table class="table table-bordered table-hover">
-            <thead class="table-light">
-                <tr>
-                    <th>ID Comandă</th>
-                    <th>Data Comenzii</th>
-                    <th>Detalii Comandă</th>
-                    <th>Adresa de Livrare</th>
-                    <th>Suma Totală</th>
-                    <th>Stare</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($orders as $order): ?>
+            <table class="table table-bordered table-hover">
+                <thead class="table-light">
                     <tr>
-                        <td><?= htmlspecialchars($order['order_id']) ?></td>
-                        <td><?= $order['formatted_order_date'] ?></td>
-                        <td>
-                            <?php foreach ($orderDetails[$order['order_id']] as $detail): ?>
-                                <p><?= htmlspecialchars($detail['name']) ?> - <?= $detail['quantity'] ?> buc. (<?= number_format($detail['price'], 2) ?> Lei/buc)</p>
-                            <?php endforeach; ?>
-                        </td>
-                        <td><?= htmlspecialchars($order['address']) ?></td>
-                        <td><?= number_format($order['total'], 2) ?> Lei</td>
-                        <td><?= htmlspecialchars($order['order_status']) ?></td>
+                        <th>ID Comandă</th>
+                        <th>Data Comenzii</th>
+                        <th>Detalii Comandă</th>
+                        <th>Adresa de Livrare</th>
+                        <th>Suma Totală</th>
+                        <th>Stare</th>
                     </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    </div>
+                </thead>
+                <tbody>
+                    <?php foreach ($orders as $order): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($order['order_id']) ?></td>
+                            <td><?= $order['formatted_order_date'] ?></td>
+                            <td>
+                                <?php foreach ($orderDetails[$order['order_id']] as $detail): ?>
+                                    <p><?= htmlspecialchars($detail['name']) ?> - <?= $detail['quantity'] ?> buc. (<?= number_format($detail['price'], 2) ?> Lei/buc)</p>
+                                <?php endforeach; ?>
+                            </td>
+                            <td><?= htmlspecialchars($order['address']) ?></td>
+                            <td><?= number_format($order['total'], 2) ?> Lei</td>
+                            <td><?= htmlspecialchars($order['order_status']) ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 </body>
 </html>

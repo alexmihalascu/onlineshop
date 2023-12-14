@@ -155,3 +155,40 @@ table th {
         -webkit-overflow-scrolling: touch;
     }
 }
+
+/* product css*/
+.product-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.product-card {
+    border: 1px solid #ddd;
+    padding: 20px;
+    flex: 1;
+    min-width: 300px;
+}
+.product-card h3 {
+    margin-top: 0;
+}
+.product-card p {
+    margin-bottom: 10px;
+}
+.product-card .btn {
+    width: 100%;
+}
+
+  /* confirm command css */
+  .container {
+    padding: 20px;
+}
+.table {
+    margin-top: 20px;
+}
+.table thead th {
+    vertical-align: bottom;
+}
+
+.table-responsive {
+    overflox-x: auto;
+}

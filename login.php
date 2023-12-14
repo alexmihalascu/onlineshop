@@ -46,15 +46,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <div class="container">
-        <h2>Autentificare</h2>
+        <h2 class="mt-4">Autentificare</h2>
         <form method="post" action="login.php">
             <div class="form-group">
-                <label>Nume de utilizator:</label>
-                <input type="text" name="username" required class="form-control">
+                <label for="username">Nume de utilizator:</label>
+                <input type="text" name="username" id="username" required class="form-control">
             </div>
             <div class="form-group">
-                <label>Parolă:</label>
-                <input type="password" name="password" required class="form-control">
+                <label for="password">Parolă:</label>
+                <input type="password" name="password" id="password" required class="form-control">
             </div>
             <div class="form-group">
                 <input type="submit" value="Autentificare" class="btn btn-primary">

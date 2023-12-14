@@ -52,55 +52,55 @@ foreach ($orders as $key => $order) {
     <div class="container my-4">
         <h2>Gestionarea Comenzilor</h2>
         <div class="table-responsive">
-        <table class="table table-bordered table-hover">
-            <thead class="table-light">
-                <tr>
-                    <th>ID Comandă</th>
-                    <th>Utilizator</th>
-                    <th>Data Comenzii</th>
-                    <th>Detalii Comandă</th>
-                    <th>Adresa de Livrare</th>
-                    <th>Suma Totală</th>
-                    <th>Stare</th>
-                    <th>Actualizare Stare</th>
-                    <th>Ștergere</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($orders as $order): ?>
+            <table class="table table-bordered table-hover">
+                <thead class="table-light">
                     <tr>
-                        <td><?= htmlspecialchars($order['order_id']) ?></td>
-                        <td><?= htmlspecialchars($order['username']) ?></td>
-                        <td><?= $order['formatted_order_date'] ?></td>
-                        <td>
-                            <?php foreach ($orderDetails[$order['order_id']] as $detail): ?>
-                                <p><?= htmlspecialchars($detail['name']) ?> - <?= $detail['quantity'] ?> buc. (<?= number_format($detail['price'], 2) ?> Lei/buc)</p>
-                            <?php endforeach; ?>
-                        </td>
-                        <td><?= htmlspecialchars($order['address']) ?></td>
-                        <td><?= number_format($order['total'], 2) ?> Lei</td>
-                        <td><?= htmlspecialchars($order['order_status']) ?></td>
-                        <td>
-                            <form action="update_order_status.php" method="post" class="d-flex justify-content-center">
-                                <input type="hidden" name="order_id" value="<?= $order['order_id'] ?>">
-                                <select name="order_status" class="form-select form-select-sm mx-2">
-                                    <option value="Efectuată" <?= $order['order_status'] == 'Efectuată' ? 'selected' : '' ?>>Efectuata</option>
-                                    <option value="Neefectuată" <?= $order['order_status'] == 'Neefectuată' ? 'selected' : '' ?>>Neefectuata</option>
-                                </select>
-                                <button type="submit" class="btn btn-primary btn-sm">Actualizează</button>
-                            </form>
-                        </td>
-                        <td>
-                            <form action="delete_order.php" method="post" class="d-grid">
-                                <input type="hidden" name="order_id" value="<?= $order['order_id'] ?>">
-                                <button type="submit" class="btn btn-danger btn-sm btn-block">Șterge</button>
-                            </form>
-                        </td>
+                        <th>ID Comandă</th>
+                        <th>Utilizator</th>
+                        <th>Data Comenzii</th>
+                        <th>Detalii Comandă</th>
+                        <th>Adresa de Livrare</th>
+                        <th>Suma Totală</th>
+                        <th>Stare</th>
+                        <th>Actualizare Stare</th>
+                        <th>Ștergere</th>
                     </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    </div>
+                </thead>
+                <tbody>
+                    <?php foreach ($orders as $order): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($order['order_id']) ?></td>
+                            <td><?= htmlspecialchars($order['username']) ?></td>
+                            <td><?= $order['formatted_order_date'] ?></td>
+                            <td>
+                                <?php foreach ($orderDetails[$order['order_id']] as $detail): ?>
+                                    <p><?= htmlspecialchars($detail['name']) ?> - <?= $detail['quantity'] ?> buc. (<?= number_format($detail['price'], 2) ?> Lei/buc)</p>
+                                <?php endforeach; ?>
+                            </td>
+                            <td><?= htmlspecialchars($order['address']) ?></td>
+                            <td><?= number_format($order['total'], 2) ?> Lei</td>
+                            <td><?= htmlspecialchars($order['order_status']) ?></td>
+                            <td>
+                                <form action="update_order_status.php" method="post" class="d-flex justify-content-center">
+                                    <input type="hidden" name="order_id" value="<?= $order['order_id'] ?>">
+                                    <select name="order_status" class="form-select form-select-sm mx-2">
+                                        <option value="Efectuată" <?= $order['order_status'] == 'Efectuată' ? 'selected' : '' ?>>Efectuata</option>
+                                        <option value="Neefectuată" <?= $order['order_status'] == 'Neefectuată' ? 'selected' : '' ?>>Neefectuata</option>
+                                    </select>
+                                    <button type="submit" class="btn btn-primary btn-sm">Actualizează</button>
+                                </form>
+                            </td>
+                            <td>
+                                <form action="delete_order.php" method="post" class="d-grid">
+                                    <input type="hidden" name="order_id" value="<?= $order['order_id'] ?>">
+                                    <button type="submit" class="btn btn-danger btn-sm btn-block">Șterge</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 </body>
 </html>

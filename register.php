@@ -54,13 +54,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <div class="container">
-        <h2>Înregistrare</h2>
+        <h2 class="mt-5">Înregistrare</h2>
         <?php if ($error): ?>
-            <p class="error"><?= $error ?></p>
+            <div class="alert alert-danger"><?= $error ?></div>
         <?php endif; ?>
 
         <?php if ($success): ?>
-            <p>Contul a fost creat cu succes. Vei fi redirecționat la pagina de autentificare.</p>
+            <div class="alert alert-success">Contul a fost creat cu succes. Vei fi redirecționat la pagina de autentificare.</div>
         <?php else: ?>
             <form method="post" action="register.php">
                 <div class="form-group">

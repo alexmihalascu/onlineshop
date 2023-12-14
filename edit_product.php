@@ -51,19 +51,19 @@ if (!$product) {
 </head>
 <body>
     <div class="container">
-        <h2>Editare Produs</h2>
+        <h2 class="mt-4">Editare Produs</h2>
         <form method="post" action="edit_product.php?id=<?= htmlspecialchars($product_id) ?>">
             <div class="form-group">
-                <label>Nume Produs:</label>
-                <input type="text" name="name" value="<?= htmlspecialchars($product['name']) ?>" required class="form-control">
+                <label for="name">Nume Produs:</label>
+                <input type="text" name="name" id="name" value="<?= htmlspecialchars($product['name']) ?>" required class="form-control">
             </div>
             <div class="form-group">
-                <label>Descriere:</label>
-                <textarea name="description" required class="form-control"><?= htmlspecialchars($product['description']) ?></textarea>
+                <label for="description">Descriere:</label>
+                <textarea name="description" id="description" required class="form-control"><?= htmlspecialchars($product['description']) ?></textarea>
             </div>
             <div class="form-group">
-                <label>Preț:</label>
-                <input type="number" name="price" value="<?= htmlspecialchars($product['price']) ?>" required class="form-control">
+                <label for="price">Preț:</label>
+                <input type="number" name="price" id="price" value="<?= htmlspecialchars($product['price']) ?>" required class="form-control">
             </div>
             <div class="form-group">
                 <input type="submit" value="Actualizează Produsul" class="btn btn-primary">
