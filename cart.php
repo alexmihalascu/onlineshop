@@ -68,6 +68,7 @@ while ($row = $result->fetch_assoc()) {
 <body>
     <div class="container">
         <h2>Coșul tău de cumpărături</h2>
+        <div class= "table-responsive">
         <form action="cart.php" method="post">
             <table class="table">
                 <thead>
@@ -104,6 +105,7 @@ while ($row = $result->fetch_assoc()) {
             <input type="submit" name="update" value="Actualizează Coșul" class="btn btn-primary">
             <a href="checkout.php" class="btn btn-success">Finalizează Comanda</a>
         </form>
+    </div>
     </div>
 </body>
 </html>
