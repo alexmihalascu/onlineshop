@@ -93,26 +93,26 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `name`, `description`, `price`, `stock`) VALUES
-(2, 'Laptop Dell XPS 13', ' Laptop ultra-subÈ›ire cu ecran OLED de 13 inch È™i procesor Intel Core i7.', '6499.00', 10),
-(3, 'Smartphone iPhone 13 Pro', 'Telefon mobil de ultimÄƒ generaÈ›ie cu camerÄƒ triplÄƒ È™i ecran Super Retina XDR.', '5799.00', 15),
-(4, 'Televizor Samsung QLED 4K 55 inch', ' Televizor cu rezoluÈ›ie Ultra HD 4K È™i tehnologie QLED pentru culori vibrante.', '3999.00', 5),
-(5, 'MaÈ™inÄƒ de spÄƒlat rufe Bosch Serie 6', 'MaÈ™inÄƒ de spÄƒlat cu Ã®ncÄƒrcare frontalÄƒ È™i capacitate de 8 kg.', '1999.00', 12),
-(6, 'CafetierÄƒ Nespresso Essenza Mini', 'CafetierÄƒ compactÄƒ cu capsule pentru cafea espresso de Ã®naltÄƒ calitate.', '499.00', 20),
-(7, 'BicicletÄƒ de munte Trek X-Caliber 9', 'BicicletÄƒ de munte de Ã®naltÄƒ performanÈ›Äƒ cu cadru din aluminiu È™i transmisie Shimano.', '4299.00', 8),
-(8, 'ConsolÄƒ de jocuri PlayStation 5', 'ConsolÄƒ de gaming de ultimÄƒ generaÈ›ie cu suport pentru jocuri 4K È™i tehnologie de urmÄƒrire a miÈ™cÄƒrii.', '2999.00', 6),
-(9, 'Aparat foto DSLR Canon EOS 80D', 'Aparat foto digital cu senzor APS-C, ecran tactil È™i capacitate de Ã®nregistrare video Full HD.', '3599.00', 7),
-(10, 'MasÄƒ de bucÄƒtÄƒrie extensibilÄƒ', 'MasÄƒ de bucÄƒtÄƒrie cu blat din lemn È™i posibilitate de extindere pentru acomodarea mai multor persoane.', '1199.00', 10),
-(11, 'Set de cÄƒÈ™ti wireless Sony WH-1000XM4', 'CÄƒÈ™ti over-ear cu tehnologia de anulare a zgomotului È™i calitate audio excepÈ›ionalÄƒ.', '1299.00', 15),
-(12, 'BormaÈ™inÄƒ cu percuÈ›ie Bosch GBH 2-26 DRE', 'BormaÈ™inÄƒ cu percuÈ›ie puternicÄƒ È™i design compact, idealÄƒ pentru lucrÄƒrile de gÄƒurire È™i dÄƒrÃ¢mÄƒri.', '799.00', 9),
-(13, 'Set de ustensile de bucÄƒtÄƒrie din oÈ›el inoxidabil', 'Set complet de ustensile de bucÄƒtÄƒrie, inclusiv cuÈ›ite, tÄƒvÄƒlii È™i ustensile pentru gÄƒtit.', '299.00', 20),
-(14, 'Tricou Adidas Originals', 'Tricou confortabil È™i elegant de la Adidas, disponibil Ã®n mai multe culori È™i mÄƒrimi.', '129.00', 30),
-(15, 'Joc de masÄƒ Catan', 'Joc de societate strategic È™i distractiv potrivit pentru Ã®ntreaga familie.', '149.00', 25),
-(16, 'MaÈ™inÄƒ de tuns gazon Honda HRX217HZA', 'MaÈ™inÄƒ de tuns gazon autopropulsatÄƒ cu motor puternic È™i sistem de tÄƒiere precis.', '2499.00', 5),
-(17, 'Parfum Chanel Coco Mademoiselle', 'Parfum iconic cu note florale È™i orientale, potrivit pentru orice ocazie.', '549.00', 12),
-(18, 'Set de canapele pentru living', 'Set elegant de canapele cu 3 locuri È™i 2 locuri, cu tapiÈ›erie din piele ecologicÄƒ.', '3999.00', 8),
-(19, 'Aparat de fitness bicicletÄƒ elipticÄƒ NordicTrack C 9.5', 'BicicletÄƒ elipticÄƒ de Ã®naltÄƒ calitate cu ecran tactil È™i program de antrenament personalizat', '6799.00', 4),
-(20, ' Rucsac de cÄƒlÄƒtorie North Face Terra 65', 'Rucsac spaÈ›ios È™i durabil, perfect pentru excursii lungi È™i cÄƒlÄƒtorii.', '899.00', 15),
-(21, 'MaÈ™inÄƒ electricÄƒ pentru copii Audi Q7', ' MaÈ™inÄƒ electricÄƒ pentru copii cu telecomandÄƒ parentalÄƒ È™i funcÈ›ii realiste', '1299.00', 7);
+(2, 'Laptop Dell XPS 13', 'Laptop ultra-subțire cu ecran OLED de 13 inch și procesor Intel Core i7', 6499.00, 10),
+(3, 'Smartphone iPhone 13 Pro', 'Telefon mobil de ultimă generație cu cameră triplă și ecran Super Retina XDR', 5799.00, 15),
+(4, 'Televizor Samsung QLED 4K 55 inch', 'Televizor cu rezoluție Ultra HD 4K și tehnologie QLED pentru culori vibrante', 3999.00, 5),
+(5, 'Mașină de spălat rufe Bosch Serie 6', 'Mașină de spălat cu încărcare frontală și capacitate de 8 kg', 1999.00, 12),
+(6, 'Cafetieră Nespresso Essenza Mini', 'Cafetieră compactă cu capsule pentru cafea espresso de înaltă calitate', 499.00, 20),
+(7, 'Bicicletă de munte Trek X-Caliber 9', 'Bicicletă de munte de înaltă performanță cu cadru din aluminiu și transmisie Shimano', 4299.00, 8),
+(8, 'Consolă de jocuri PlayStation 5', 'Consolă de gaming de ultimă generație cu suport pentru jocuri 4K și tehnologie de urmărire a mișcării', 2999.00, 6),
+(9, 'Aparat foto DSLR Canon EOS 80D', 'Aparat foto digital cu senzor APS-C, ecran tactil și capacitate de înregistrare video Full HD', 3599.00, 7),
+(10, 'Masă de bucătărie extensibilă', 'Masă de bucătărie cu blat din lemn și posibilitate de extindere pentru acomodarea mai multor persoane', 1199.00, 10),
+(11, 'Set de căști wireless Sony WH-1000XM4', 'Căști over-ear cu tehnologia de anulare a zgomotului și calitate audio excepțională', 1299.00, 15),
+(12, 'Bormașină cu percuție Bosch GBH 2-26 DRE', 'Bormașină cu percuție puternică și design compact, ideală pentru lucrările de găurire și dărâmări', 799.00, 9),
+(13, 'Set de ustensile de bucătărie din oțel inoxidabil', 'Set complet de ustensile de bucătărie, inclusiv cuțite, tăvălii și ustensile pentru gătit', 299.00, 20),
+(14, 'Tricou Adidas Originals', 'Tricou confortabil și elegant de la Adidas, disponibil în mai multe culori și mărimi', 129.00, 30),
+(15, 'Joc de masă Catan', 'Joc de societate strategic și distractiv potrivit pentru întreaga familie', 149.00, 25),
+(16, 'Mașină de tuns gazon Honda HRX217HZA', 'Mașină de tuns gazon autopropulsată cu motor puternic și sistem de tăiere precis', 2499.00, 5),
+(17, 'Parfum Chanel Coco Mademoiselle', 'Parfum iconic cu note florale și orientale, potrivit pentru orice ocazie', 549.00, 12),
+(18, 'Set de canapele pentru living', 'Set elegant de canapele cu 3 locuri și 2 locuri, cu tapițerie din piele ecologică', 3999.00, 8),
+(19, 'Aparat de fitness bicicletă eliptică NordicTrack C 9.5', 'Bicicletă eliptică de înaltă calitate cu ecran tactil și program de antrenament personalizat', 6799.00, 4),
+(20, 'Rucsac de călătorie North Face Terra 65', 'Rucsac spațios și durabil, perfect pentru excursii lungi și călătorii', 899.00, 15),
+(21, 'Mașină electrică pentru copii Audi Q7', 'Mașină electrică pentru copii cu telecomandă parentală și funcții realiste', 1299.00, 7);
 
 -- --------------------------------------------------------
 
