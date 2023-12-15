@@ -12,13 +12,12 @@ if (!isset($_SESSION['user_id']) || !$_SESSION['is_admin']) {
 }
 
 $sql = "SELECT o.order_id, u.username, o.order_date, o.order_status, 
-        da.phone, da.street, da.number, da.block, da.apartment, da.city,
+        o.phone, o.street, o.number, o.block, o.apartment, o.city,
         SUM(p.price * od.quantity) AS total
         FROM orders o
         JOIN order_details od ON o.order_id = od.order_id
         JOIN products p ON od.product_id = p.product_id
         JOIN users u ON o.user_id = u.user_id
-        LEFT JOIN delivery_addresses da ON o.user_id = da.user_id
         GROUP BY o.order_id";
 $result = $conn->query($sql);
 $orders = $result->fetch_all(MYSQLI_ASSOC);

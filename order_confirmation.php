@@ -13,21 +13,17 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-// Preluarea ultimei comenzi plasate de utilizator
-$sql = "SELECT order_id, order_date FROM orders WHERE user_id = ? ORDER BY order_date DESC LIMIT 1";
+// Preluarea ultimei comenzi plasate de utilizator, inclusiv detaliile de livrare
+$sql = "SELECT order_id, order_date, phone, street, number, block, apartment, city FROM orders WHERE user_id = ? ORDER BY order_date DESC LIMIT 1";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
 $order = $result->fetch_assoc();
 
-// Preluarea adresei de livrare pentru comanda curentă
-$sql = "SELECT phone, street, number, block, apartment, city FROM delivery_addresses WHERE user_id = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $user_id);
-$stmt->execute();
-$address_result = $stmt->get_result();
-$address = $address_result->fetch_assoc();
+if (!$order) {
+    die('Nu s-a găsit nicio comandă.');
+}
 
 // Preluarea detaliilor ultimei comenzi
 $sql = "SELECT p.name, p.price, od.quantity FROM order_details od INNER JOIN products p ON od.product_id = p.product_id WHERE od.order_id = ?";
@@ -91,8 +87,8 @@ $items = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
         <div class="delivery-details mt-4">
             <h3>Detalii Livrare</h3>
-            <p>Telefon: <?= htmlspecialchars($address['phone']) ?></p>
-            <p>Adresă: <?= htmlspecialchars($address['street']) ?>, Nr. <?= htmlspecialchars($address['number']) ?><?= $address['block'] ? ', Bl. ' . htmlspecialchars($address['block']) : '' ?><?= $address['apartment'] ? ', Ap. ' . htmlspecialchars($address['apartment']) : '' ?>, <?= htmlspecialchars($address['city']) ?></p>
+            <p>Telefon: <?= htmlspecialchars($order['phone']) ?></p>
+            <p>Adresă: Str. <?= htmlspecialchars($order['street']) ?>, Nr. <?= htmlspecialchars($order['number']) ?><?= $order['block'] ? ', Bl. ' . htmlspecialchars($order['block']) : '' ?><?= $order['apartment'] ? ', Ap. ' . htmlspecialchars($order['apartment']) : '' ?>, <?= htmlspecialchars($order['city']) ?></p>
         </div>
 
         <p class="mt-4">Îți mulțumim pentru comandă, <?= htmlspecialchars($_SESSION['username']) ?>! Comanda ta a fost procesată și este în curs de pregătire.</p>

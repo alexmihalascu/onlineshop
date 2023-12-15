@@ -6,7 +6,6 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-// Verifică dacă utilizatorul este admin
 if (!isset($_SESSION['user_id']) || !$_SESSION['is_admin']) {
     header('Location: login.php');
     exit;
@@ -14,7 +13,7 @@ if (!isset($_SESSION['user_id']) || !$_SESSION['is_admin']) {
 
 $product_id = isset($_GET['id']) ? $_GET['id'] : die('Produsul nu a fost găsit.');
 
-// Preluarea datelor produsului pentru editare
+// Procesarea datelor formularului pentru editare
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST['name'];
     $description = $_POST['description'];
@@ -23,23 +22,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $sql = "UPDATE products SET name = ?, description = ?, price = ?, stock = ? WHERE product_id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssdii", $name, $description, $price, $stock, $product_id);
-    if ($stmt->execute()) {
-        echo "<p>Produsul a fost actualizat cu succes!</p>";
-    } else {
-        echo "<p>A apărut o eroare la actualizarea produsului.</p>";
+    if (!$stmt) {
+        die("Eroare la pregătirea interogării: " . $conn->error);
     }
-} else {
-    $sql = "SELECT name, description, price, stock FROM products WHERE product_id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $product_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $product = $result->fetch_assoc();
 
-    if (!$product) {
-        die('Produsul nu a fost găsit.');
+    $stmt->bind_param("ssdii", $name, $description, $price, $stock, $product_id);
+    if (!$stmt->execute()) {
+        die("Eroare la execuția interogării: " . $stmt->error);
     }
+
+    echo "<p>Produsul a fost actualizat cu succes!</p>";
+}
+
+// Preluarea datelor produsului pentru editare
+$sql = "SELECT name, description, price, stock FROM products WHERE product_id = ?";
+$stmt = $conn->prepare($sql);
+if (!$stmt) {
+    die("Eroare la pregătirea interogării: " . $conn->error);
+}
+
+$stmt->bind_param("i", $product_id);
+if (!$stmt->execute()) {
+    die("Eroare la execuția interogării: " . $stmt->error);
+}
+
+$result = $stmt->get_result();
+$product = $result->fetch_assoc();
+
+if (!$product) {
+    die('Produsul nu a fost găsit.');
 }
 ?>
 
@@ -51,10 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editare Produs</title>
     <link href="style.css" rel="stylesheet">
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body>

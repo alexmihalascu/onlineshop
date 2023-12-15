@@ -60,19 +60,23 @@ $result = $conn->query($sql);
                     <?php if ($isAdmin) : ?>
                         <p>Stoc: <?= htmlspecialchars($product['stock']) ?></p>
                     <?php endif; ?>
-                    <?php if ($loggedIn) : ?>
-                        <?php if ($product['stock'] > 0) : ?>
-                            <a href="add_to_cart.php?product_id=<?= $product['product_id'] ?>&quantity=1" class="btn btn-primary">Adaugă în Coș</a>
+
+                    <!-- Mutarea butoanelor de acțiune la sfârșitul cardului -->
+                    <div class="action-buttons">
+                        <?php if ($loggedIn) : ?>
+                            <?php if ($product['stock'] > 0) : ?>
+                                <a href="add_to_cart.php?product_id=<?= $product['product_id'] ?>&quantity=1" class="btn btn-primary">Adaugă în Coș</a>
+                            <?php else : ?>
+                                <button class="btn btn-secondary disabled">Stoc epuizat</button>
+                            <?php endif; ?>
                         <?php else : ?>
-                            <button class="btn btn-secondary disabled">Stoc epuizat</button>
+                            <button class="btn btn-secondary disabled">Necesită autentificare</button>
                         <?php endif; ?>
-                    <?php else : ?>
-                        <button class="btn btn-secondary disabled">Necesită autentificare</button>
-                    <?php endif; ?>
-                    <?php if ($isAdmin) : ?>
-                        <a href="edit_product.php?id=<?= $product['product_id'] ?>" class="btn btn-primary">Editează Produs</a>
-                        <a href="delete_product.php?id=<?= $product['product_id'] ?>" class="btn btn-danger">Șterge Produs</a>
-                    <?php endif; ?>
+                        <?php if ($isAdmin) : ?>
+                            <a href="edit_product.php?id=<?= $product['product_id'] ?>" class="btn btn-primary">Editează Produs</a>
+                            <a href="delete_product.php?id=<?= $product['product_id'] ?>" class="btn btn-danger">Șterge Produs</a>
+                        <?php endif; ?>
+                    </div>
                 </div>
             <?php endwhile; ?>
 

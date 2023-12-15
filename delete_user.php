@@ -29,13 +29,13 @@ if (isset($_GET['id'])) {
         $stmt->bind_param("i", $user_id);
         $stmt->execute();
 
-        // Șterge înregistrările asociate din tabela delivery_addresses
-        $sql = "DELETE FROM delivery_addresses WHERE user_id = ?";
+        // Șterge înregistrările din tabela user_profile asociate cu acest utilizator
+        $sql = "DELETE FROM user_profile WHERE user_id = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $user_id);
         $stmt->execute();
 
-        // Acum, șterge utilizatorul
+        // Acum, șterge utilizatorul din tabela "users"
         $sql = "DELETE FROM users WHERE user_id = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $user_id);

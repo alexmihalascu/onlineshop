@@ -13,13 +13,12 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-$sql = "SELECT o.order_id, o.order_date, o.order_status, 
-        da.phone, da.street, da.number, da.block, da.apartment, da.city,
+// Interogare pentru preluarea comenzilor utilizatorului
+$sql = "SELECT o.order_id, o.order_date, o.order_status, o.phone, o.street, o.number, o.block, o.apartment, o.city,
         SUM(p.price * od.quantity) AS total
         FROM orders o
         JOIN order_details od ON o.order_id = od.order_id
         JOIN products p ON od.product_id = p.product_id
-        LEFT JOIN delivery_addresses da ON o.user_id = da.user_id
         WHERE o.user_id = ?
         GROUP BY o.order_id";
 $stmt = $conn->prepare($sql);
@@ -64,7 +63,7 @@ foreach ($orders as $key => $order) {
                         <th>ID Comandă</th>
                         <th>Data Comenzii</th>
                         <th>Detalii Comandă</th>
-                        <th>Adresa de Livrare</th>
+                        <th>Detalii Livrare</th>
                         <th>Suma Totală</th>
                         <th>Stare</th>
                     </tr>
@@ -79,7 +78,13 @@ foreach ($orders as $key => $order) {
                                     <p><?= htmlspecialchars($detail['name']) ?> - <?= $detail['quantity'] ?> buc. (<?= number_format($detail['price'], 2) ?> Lei/buc)</p>
                                 <?php endforeach; ?>
                             </td>
-                            <td><?= htmlspecialchars($order['street']) . ', ' . htmlspecialchars($order['number']) . ($order['block'] ? ', Bl. ' . htmlspecialchars($order['block']) : '') . ($order['apartment'] ? ', Ap. ' . htmlspecialchars($order['apartment']) : '') . ', ' . htmlspecialchars($order['city']) ?></td>
+                            <td>
+                                Tel. <?= htmlspecialchars($order['phone']) ?><br>
+                                Str. <?= htmlspecialchars($order['street']) . ', ' . htmlspecialchars($order['number']) ?>
+                                <?= ($order['block'] ? ', Bl. ' . htmlspecialchars($order['block']) : '') ?>
+                                <?= ($order['apartment'] ? ', Ap. ' . htmlspecialchars($order['apartment']) : '') ?>
+                                , <?= htmlspecialchars($order['city']) ?>
+                            </td>
                             <td><?= number_format($order['total'], 2) ?> Lei</td>
                             <td><?= htmlspecialchars($order['order_status']) ?></td>
                         </tr>
