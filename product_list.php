@@ -9,9 +9,19 @@ if (session_status() == PHP_SESSION_NONE) {
 $loggedIn = isset($_SESSION['user_id']);
 $isAdmin = isset($_SESSION['is_admin']) && $_SESSION['is_admin'];
 
-// Preia criteriul și direcția de sortare din GET sau setează unul implicit
-$sort = isset($_GET['sort']) ? $_GET['sort'] : 'name';
-$order = isset($_GET['order']) && in_array($_GET['order'], ['ASC', 'DESC']) ? $_GET['order'] : 'ASC';
+// Preia criteriul și direcția de sortare din sesiune sau setează unul implicit
+$sort = isset($_SESSION['sort']) ? $_SESSION['sort'] : 'name';
+$order = isset($_SESSION['order']) ? $_SESSION['order'] : 'ASC';
+
+// Preia criteriile de sortare din GET, dacă sunt setate
+if (isset($_GET['sort'])) {
+    $sort = $_GET['sort'];
+    $_SESSION['sort'] = $sort;
+}
+if (isset($_GET['order'])) {
+    $order = $_GET['order'];
+    $_SESSION['order'] = $order;
+}
 
 // Validare și pregătire a query-ului pentru sortare
 $allowedSorts = ['name', 'price', 'product_id'];
@@ -60,8 +70,6 @@ $result = $conn->query($sql);
                     <?php if ($isAdmin) : ?>
                         <p>Stoc: <?= htmlspecialchars($product['stock']) ?></p>
                     <?php endif; ?>
-
-                    <!-- Mutarea butoanelor de acțiune la sfârșitul cardului -->
                     <div class="action-buttons">
                         <?php if ($loggedIn) : ?>
                             <?php if ($product['stock'] > 0) : ?>
@@ -79,7 +87,6 @@ $result = $conn->query($sql);
                     </div>
                 </div>
             <?php endwhile; ?>
-
         </div>
     </div>
 </body>
